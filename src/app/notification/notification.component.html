@@ -1,0 +1,78 @@
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer
+              class="drawer"
+              mode="side"
+              opened="false">
+
+    <mat-toolbar class="header">
+      <div>COM</div>
+      <mat-icon class="close"
+                (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <div class="mat-drawer-side">
+        <a routerLink="/home" class="nav-link">Home</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/notification" class="nav-link">Notifications</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/people" class="nav-link">People</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a routerLink="/home/assignment-manage" class="nav-link">Assignment Management</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <!--<div class="mat-drawer-side" *ngIf="isAdmin">-->
+      <!--<a  class="make-blue" (click)="onUpload()">Upload File</a>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--</div>-->
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <app-header></app-header>
+  </mat-toolbar>
+
+  <div class="main contents">
+    <!--==========================-->
+    <mat-card>
+
+      <mat-card-title>Notifications</mat-card-title>
+      <div class="notification-list-container" *ngFor="let UserNotification of notifications;index as i ">
+
+        <div *ngIf="notifications&&i%2==0" class="notification-content">
+          <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+          <mat-card class = "even">{{UserNotification.content}} </mat-card>
+        </div>
+        <div *ngIf="notifications&&i%2!=0" class="notification-content">
+          <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+          <mat-card >{{UserNotification.content}} </mat-card>
+        </div>
+
+      </div>
+
+
+    </mat-card>
+
+    <!--=========================-->
+    <div style="height: 450px">&nbsp;</div>
+  </div>
+
+</mat-drawer-container>

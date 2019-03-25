@@ -1,0 +1,67 @@
+.drawer {
+  position: fixed;
+
+  height: 100vh;
+  min-width: 16%;
+  border-right: 1px solid #ccc;
+}
+.drawer .header {
+  position: absolute;
+  right: 0;
+  justify-content: space-between;
+}
+.drawer .contents {
+  margin-top: 60px;
+
+}
+
+.drawer .make-blue{
+  color: #007bff;
+}
+
+.main {
+  background-color: #fff;
+}
+
+.main.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  border-bottom: 1px solid #ccc;
+  float: right;
+}
+
+.main.contents {
+  min-height: 100vh;
+  margin-top: 64px; /* height of header */
+  padding: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table{
+  width: 100%;
+}
+
+.add_board_button{
+  top: 625px;
+  right: 50px;
+
+  font-size: 55px!important;
+
+  position: fixed!important;
+  z-index: 99!important;
+}
+

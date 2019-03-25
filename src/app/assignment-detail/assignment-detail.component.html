@@ -1,0 +1,97 @@
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer
+              class="drawer"
+              mode="side"
+              opened="false">
+
+    <mat-toolbar class="header">
+      <div>COM</div>
+      <mat-icon class="close"
+                (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <div class="mat-drawer-side">
+        <a routerLink="/home" class="nav-link">Home</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/notification" class="nav-link">Notifications</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/people" class="nav-link">People</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a routerLink="/home/assignment-manage" class="nav-link">Assignment Management</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <!--<div class="mat-drawer-side" *ngIf="isAdmin">-->
+        <!--<a  class="make-blue" (click)="onUpload()">Upload File</a>-->
+        <!--<mat-divider></mat-divider>-->
+      <!--</div>-->
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <app-header></app-header>
+  </mat-toolbar>
+
+  <div class="main contents">
+
+<!--==========================-->
+<div class="container-fluid" *ngIf="assignment">
+  <div class="row product-detail-container">
+    <div class="col-sm-9">
+
+<div class="assignment-detail-title">
+ <h2>{{assignment.tittle}}</h2>
+  <!--<h1>{{assignment.tittle}}</h1>-->
+</div>
+<div class="assignment-detail-content">
+    {{assignment.description}}
+</div>
+
+      <div class="need-boarder" *ngIf="!passed&&!isAdmin&&!fileId">
+        <h5>Submit your assignment here</h5>
+
+        <input type="file" name="file" (change)="onChange($event) ">
+        <button name = "submit butt"(click)="onSubmission()" [disabled]="file==null" >Submit</button>
+      </div>
+
+      <div class="need-boarder" *ngIf="fileId&&!isAdmin">
+       <h5>Download your submission</h5>
+
+        <button mat-flat-button class = "downloadbutt"(click)="onDownload()"> <mat-icon>file_download</mat-icon>Download</button>
+        <!--<a name = "download"(click)="onDownload()" >download</a>-->
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="container-fluid" *ngIf="!assignment">-->
+<!--<h2>not exist</h2>-->
+<!--</div>-->
+<!--=========================-->
+
+    <div style="height: 450px">&nbsp;</div>
+  </div>
+
+</mat-drawer-container>

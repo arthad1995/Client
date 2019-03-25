@@ -1,0 +1,15 @@
+<form  (ngSubmit)="submit(editForm.value)" #editForm="ngForm">
+  <div>
+  <mat-form-field>
+    <input matInput type="text"  value = "{{tittle}}"  name = "tittle" id = "tittle" placeholder="Tittle" ngModel="{{tittle}}" >
+  </mat-form-field>
+  </div>
+  <div>
+  <mat-form-field>
+    <textarea matInput id = "content" value="{{content}}" name = "content"  placeholder="Content" ngModel="{{content}}"></textarea>
+  </mat-form-field>
+
+  </div>
+
+  <button type="submit" mat-raised-button color="primary">Submit</button>
+</form>

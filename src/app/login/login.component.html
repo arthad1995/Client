@@ -1,0 +1,29 @@
+<main class="container">
+  <mat-card fxFlex.gt-sm="60%" fxFlexOffset.gt-sm="20%">
+    <mat-card-title>Login</mat-card-title>
+    <form (ngSubmit)="loginForm.valid && onSubmit(loginForm.value)" fxLayout="column" #loginForm="ngForm" (input)="updateErr()">
+      <mat-form-field>
+        <mat-placeholder>Username</mat-placeholder>
+        <input type="text" matInput id="username" name="username" ngModel #name="ngModel" required>
+        <mat-error *ngIf="(loginForm.submitted || name.touched) && name.invalid">
+      Username can't be empty!
+    </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Password</mat-placeholder>
+        <input type="password" matInput id="password" name="password" ngModel #password="ngModel" required>
+        <mat-error *ngIf="(loginForm.submitted || password.touched) && password.invalid">
+          Password can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="loginForm.submitted && err">
+        Your username and password does not match records.
+      </mat-error>
+      <div>
+        <button type="submit" mat-raised-button color="primary">Login</button>
+        <a mat-button color="primary" (click)="onRegister()">Register</a>
+        <a mat-button color="primary" (click)="onForgot()">Forgot Password</a>
+      </div>
+    </form>
+  </mat-card>
+</main>

@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light barcolor">
+  <a class="navbar-brand barcolor" routerLink="/home" >COM</a>
+  <button class="navbar-toggler barcolor" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon barcolor"></span>
+  </button>
+  <div class="collapse navbar-collapse barcolor" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto barcolor">
+      <li class="nav-item barcolor" *ngIf="!isAdmin">
+        <a routerLink="/home/assignments" class="nav-link">Assignments</a>
+      </li>
+      <li class="nav-item barcolor">
+        <a routerLink="/home/board-overview" class="nav-link">Board</a>
+      </li>
+      <li class="nav-item barcolor">
+        <a routerLink="/home/file-download" class="nav-link">Files</a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav ml-auto barcolor">
+      <li class="nav-item float-right">
+
+
+        <button mat-button class="iconPosition" [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+        <mat-menu #menu="matMenu">
+
+          <button mat-menu-item (click)="onEdit()">Edit Profile</button>
+          <button mat-menu-item (click)="onClickLogout()">Logout</button>
+
+        </mat-menu>
+          <!--<a routerLink="/login" (click)="onClickLogout()"><mat-icon>account_circle</mat-icon></a>-->
+
+      </li>
+    </ul>
+  </div>
+</nav>

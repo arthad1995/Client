@@ -1,0 +1,260 @@
+<!--&lt;!&ndash;<app-header></app-header>&ndash;&gt;-->
+<!--<app-drawer-container></app-drawer-container>-->
+<!--<div>-->
+  <!--<p>Notifications</p>-->
+  <!--<section class="notification-list-section">-->
+    <!--<div class="notification-list-container">-->
+
+      <!--<a class="notification-list-item" *ngFor="let UserNotification of notifications " >-->
+
+        <!--<div *ngIf="notifications" class="notification-content">-->
+          <!--{{UserNotification.content}}-->
+        <!--</div>-->
+        <!--<div class="notification-list-item-brand products-list-item-text" *ngIf="notifications">-->
+          <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+        <!--</div>-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</section>-->
+<!--</div>-->
+
+
+
+<!--<div *ngIf="!isAdmin">-->
+  <!--<h2>Assignments To do</h2>-->
+  <!--<section class="assignment-list-section">-->
+    <!--<div class="assignment-list-container">-->
+
+      <!--<a class="assignment-list-item" *ngFor="let assignment of assignments | dateFliter"  [routerLink]="['/home/assignment-detail', assignment.id]">-->
+
+        <!--<div class="assignment-content">-->
+          <!--{{assignment.tittle}}-->
+        <!--</div>-->
+        <!--<div class="assignment-list-item-brand">-->
+          <!--{{assignment.duedate| date:'yyyy-MM-dd HH:mm:ss'}}-->
+        <!--</div>-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</section>-->
+<!--</div>-->
+
+
+
+<!--<h2>Other functions  </h2>-->
+<!--<div *ngIf="!isAdmin">-->
+<!--<a class="assignment-link"  [routerLink] = "['/home/assignments']">Assignments</a>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--<a class="grades-link"  [routerLink] = "['/home/grades']">Grades</a>-->
+  <!--<div *ngIf="isAdmin">-->
+  <!--<a class="assignment-manage"  [routerLink] = "['/home/assignment-manage']">Assignment Management</a>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<div *ngIf="isAdmin">-->
+<!--<button mat-raised-button (click)="onUpload()">Upload File</button>-->
+<!--</div>-->
+<!--<button mat-raised-button (click)="onLogout()">Logout</button>-->
+<!--<button mat-raised-button (click)="onPeople()">People</button>-->
+
+<!--<button mat-raised-button (click)="onEdit()">Edit Profile</button>-->
+<!--<button mat-raised-button [routerLink] = "['/home/file-download']">File Download</button>-->
+
+<!--<button mat-raised-button [routerLink] = "['/home/board-overview']">Board</button>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer
+              class="drawer"
+              mode="side"
+              opened="false">
+
+    <mat-toolbar class="header">
+      <div>COM</div>
+      <mat-icon class="close"
+                (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <div class="mat-drawer-side">
+        <a routerLink="/home" class="nav-link">Home</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/notification" class="nav-link">Notifications</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/people" class="nav-link">People</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a routerLink="/home/assignment-manage" class="nav-link">Assignment Management</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a  class="make-blue" (click)="onUpload()">Upload File</a>
+        <mat-divider></mat-divider>
+      </div>
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <app-header></app-header>
+  </mat-toolbar>
+
+  <div class="main contents">
+
+
+
+
+    <!--============================================================================-->
+
+    <!--<app-header></app-header>-->
+    <!--<app-drawer-container></app-drawer-container>-->
+   <mat-card>
+
+    <mat-card-title>Notifications</mat-card-title>
+        <div class="notification-list-container" *ngFor="let UserNotification of notifications;index as i ">
+
+            <div *ngIf="notifications&&i%2==0" class="notification-content">
+              <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+              <mat-card class = "even">{{UserNotification.content}} </mat-card>
+            </div>
+          <div *ngIf="notifications&&i%2!=0" class="notification-content">
+            <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+            <mat-card >{{UserNotification.content}} </mat-card>
+          </div>
+
+        </div>
+
+
+   </mat-card>
+
+
+
+    <div *ngIf="!isAdmin">
+      <mat-card>
+      <mat-card-title>Assignments To Do</mat-card-title>
+
+
+
+          <div class="assignment-list-item" *ngFor="let assignment of assignments | dateFliter ;index as i"  [routerLink]="['/home/assignment-detail', assignment.id]">
+
+
+            <!--<div class="assignment-list-item-brand">-->
+              <!--{{assignment.duedate| date:'yyyy-MM-dd HH:mm:ss'}}-->
+            <!--</div>-->
+
+            <div *ngIf="assignments&&i%2!=0" class="notification-content">
+              <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+              <mat-card class = "odd"> <a routerLink="/home/assignment-detail/{{assignment.id}}" class="nav-link">{{assignment.tittle}}</a></mat-card>
+            </div>
+
+
+            <div *ngIf="assignments&&i%2==0" class="notification-content">
+              <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+              <mat-card > <a routerLink="/home/assignment-detail/{{assignment.id}}" class="nav-link">{{assignment.tittle}}</a></mat-card>
+            </div>
+
+
+          </div>
+
+
+      </mat-card>
+    </div>
+
+
+    <div *ngIf="isAdmin">
+      <mat-card>
+        <mat-card-title>Assignments To Grade</mat-card-title>
+
+
+
+        <div class="assignment-list-item" *ngFor="let assignment of assignments | dateFliter ;index as i">
+
+             <!--[routerLink]="['/home/assignment-detail', assignment.id]">-->
+          <!--<div class="assignment-list-item-brand">-->
+          <!--{{assignment.duedate| date:'yyyy-MM-dd HH:mm:ss'}}-->
+          <!--</div>-->
+
+          <div *ngIf="assignments&&i%2!=0" class="notification-content">
+            <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+
+            <mat-card  class = "odd">     <a routerLink="/home/assignment-detail/{{assignment.id}}" class="nav-link">{{assignment.tittle}}</a>
+              <mat-card-footer>due by:   {{assignment.duedate| date:'yyyy-MM-dd HH:mm:ss'}}</mat-card-footer>
+            </mat-card>
+          </div>
+
+
+          <div *ngIf="assignments&&i%2==0" class="notification-content">
+            <!--{{UserNotification.time| date:'yyyy-MM-dd HH:mm:ss'}}-->
+            <mat-card > <a routerLink="/home/assignment-detail/{{assignment.id}}" class="nav-link">{{assignment.tittle}}</a>
+              <mat-card-footer class="linkColor">due by:   {{assignment.duedate| date:'yyyy-MM-dd HH:mm:ss'}}</mat-card-footer>
+            </mat-card>
+          </div>
+
+        </div>
+
+
+      </mat-card>
+    </div>
+
+
+
+    <!--<div *ngIf="!isAdmin">-->
+    <!--<a class="assignment-link"  [routerLink] = "['/home/assignments']">Assignments</a>-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a class="grades-link"  [routerLink] = "['/home/grades']">Grades</a>-->
+    <!--<div *ngIf="isAdmin">-->
+    <!--<a class="assignment-manage"  [routerLink] = "['/home/assignment-manage']">Assignment Management</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="isAdmin">-->
+    <!--<button mat-raised-button (click)="onUpload()">Upload File</button>-->
+    <!--</div>-->
+    <!--<button mat-raised-button (click)="onLogout()">Logout</button>-->
+    <!--<button mat-raised-button (click)="onPeople()">People</button>-->
+
+    <!--<button mat-raised-button (click)="onEdit()">Edit Profile</button>-->
+    <!--<button mat-raised-button [routerLink] = "['/home/file-download']">File Download</button>-->
+
+    <!--<button mat-raised-button [routerLink] = "['/home/board-overview']">Board</button>-->
+
+
+
+
+    <div style="height: 450px">&nbsp;</div>
+  </div>
+
+</mat-drawer-container>
+

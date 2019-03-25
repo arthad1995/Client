@@ -1,0 +1,39 @@
+
+<!--<div class="dd">-->
+<!--<table class="t1" style="position:absolute">-->
+  <!--<tr>-->
+   <!--<th>Student Name</th>-->
+    <!--<tr *ngFor="let u of users">{{u.name}}</tr>-->
+
+
+
+<!--</table>-->
+
+<!--<table class="t2" style="position:absolute">-->
+  <!--<th  *ngFor="let a of assignments">{{a.tittle}}    <a (click)="downloadSubmissions(a.id)">download</a></th>-->
+    <!--<tr *ngFor="let data of scores; let i = index">-->
+
+    <!--<td *ngFor="let cell of data">-->
+
+
+      <!--<input  type = number [value]="cell.score">-->
+    <!--</td>-->
+  <!--</tr>-->
+
+
+<!--</table>-->
+<!--</div>-->
+
+
+
+<div>
+  <div class="notification-list-item" *ngFor="let assignment of assignments " >
+
+    <a [routerLink]="['/grade', assignment.id]"> {{assignment.tittle}}</a>
+    <a (click)="downloadSubmissions(assignment.id)"> download Submission</a>
+  </div>
+
+
+</div>
+
+

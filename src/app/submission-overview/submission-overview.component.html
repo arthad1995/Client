@@ -1,0 +1,119 @@
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer
+              class="drawer"
+              mode="side"
+              opened="false">
+
+    <mat-toolbar class="header">
+      <div>COM</div>
+      <mat-icon class="close"
+                (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <div class="mat-drawer-side">
+        <a routerLink="/home" class="nav-link">Home</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/notification" class="nav-link">Notifications</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/people" class="nav-link">People</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a routerLink="/home/assignment-manage" class="nav-link">Assignment Management</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <!--<div class="mat-drawer-side" *ngIf="isAdmin">-->
+      <!--<a  class="make-blue" (click)="onUpload()">Upload File</a>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--</div>-->
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <app-header></app-header>
+  </mat-toolbar>
+
+  <div class="main contents">
+    <!--==========================-->
+
+<!--<div class="mat-elevation-z8">-->
+  <!--<p>assignments</p>-->
+  <!--<section class="submission-list-section">-->
+    <!--<div class="submission-list-container">-->
+
+      <!--<div class="submission-list-item" *ngFor="let ass of assignmentDetails " [routerLink]="['/home/assignment-detail', ass.assignment.id] ">-->
+
+        <!--<div class="submission-content">-->
+          <!--<a  [routerLink]="['/home/assignment-detail', ass.assignment.id]">  {{ass.assignment.tittle}}   </a>-->
+          <!--<a *ngIf="!ass.submission else elseBlock">-->
+             <!--no submission-->
+          <!--</a>-->
+          <!--<ng-template #elseBlock>-->
+         <!--{{ass.submission.score||'not grade yet'}}-->
+            <!--</ng-template>-->
+          <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+  <!--</section>-->
+<!--</div>-->
+
+    <div class="mat-elevation-z8">
+      <table class="gradeTable" mat-table [dataSource]="info" >
+
+        <ng-container matColumnDef='tittle'>
+          <th mat-header-cell *matHeaderCellDef >Assignment</th>
+          <td mat-cell *matCellDef="let element"> <a  [routerLink]="['/home/assignment-detail', element.id]">  {{element.tittle}}   </a></td>
+        </ng-container>
+
+
+        <ng-container matColumnDef='score'>
+          <th mat-header-cell *matHeaderCellDef >Score</th>
+          <td mat-cell *matCellDef="let element">
+
+            <a *ngIf="!element.score&&element.score!=0 else elseBlock">
+            no submission
+            </a>
+            <ng-template #elseBlock>
+            {{element.score||'not grade yet'}}
+            </ng-template>
+
+
+
+
+          </td>
+        </ng-container>
+
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <div class="float-right">
+      <h4> Average Grade:  {{average| number}}%</h4>
+    </div>
+    <!--=========================-->
+    <div style="height: 450px">&nbsp;</div>
+  </div>
+
+</mat-drawer-container>

@@ -1,0 +1,98 @@
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer
+              class="drawer"
+              mode="side"
+              opened="false">
+
+    <mat-toolbar class="header">
+      <div>COM</div>
+      <mat-icon class="close"
+                (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <div class="mat-drawer-side">
+        <a routerLink="/home" class="nav-link">Home</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/notification" class="nav-link">Notifications</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/people" class="nav-link">People</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a routerLink="/home/assignment-manage" class="nav-link">Assignment Management</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <!--<div class="mat-drawer-side" *ngIf="isAdmin">-->
+      <!--<a  class="make-blue" (click)="onUpload()">Upload File</a>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--</div>-->
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <app-header></app-header>
+  </mat-toolbar>
+
+  <div class="main contents">
+    <!--==========================-->
+
+
+
+
+
+
+<div *ngIf="board">
+<h3>{{board.tittle}}</h3>
+  <h5>{{board.uname}}</h5>
+<div>{{board.content}}</div>
+
+<hr>
+<div *ngFor="let r of replies">
+  <h5>{{r.uname}}:</h5>
+  <div >
+    {{r.content}}
+
+    <button *ngIf="r.senderId==currentUserId" size="50%" class = "btn in-board-button"(click)="onDelete(r.id)">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+    <button  size="50%" class = "btn in-board-button"(click)="replyTo(r.senderId)">
+      <mat-icon>comment</mat-icon>
+    </button>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+</div>
+
+</div>
+
+
+
+
+    <!--=========================-->
+    <div style="height: 450px">&nbsp;</div>
+  </div>
+
+</mat-drawer-container>
+
+<button mat-icon-button color="warn" size="300%" class = "add_reply_button"(click)="onCreate()">
+  <mat-icon [inline]="true">add_circle</mat-icon>
+</button>

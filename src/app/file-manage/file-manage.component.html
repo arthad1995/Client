@@ -1,0 +1,12 @@
+<!--<input type="file" name="photo" ng2FileSelect [uploader]="uploader" />-->
+
+<!--<button type="button" class="btn btn-success btn-s"-->
+        <!--(click)="uploader.uploadAll()"-->
+        <!--[disabled]="!uploader.getNotUploadedItems().length" >-->
+  <!--Submit the file-->
+<!--</button>-->
+
+<div class="mat-elevation-z14">
+<input type="file" name="file" (change)="onChange($event)">
+<button (click)="onSubmission()" [disabled]="file==null" >Submit</button>
+</div>

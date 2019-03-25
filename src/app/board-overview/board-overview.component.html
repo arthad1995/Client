@@ -1,0 +1,96 @@
+<mat-drawer-container
+  [class.drawer-opened]="drawer.opened"
+  class="example-container">
+  <mat-drawer #drawer
+              class="drawer"
+              mode="side"
+              opened="false">
+
+    <mat-toolbar class="header">
+      <div>COM</div>
+      <mat-icon class="close"
+                (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents">
+      <div class="mat-drawer-side">
+        <a routerLink="/home" class="nav-link">Home</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/notification" class="nav-link">Notifications</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="mat-drawer-side">
+        <a routerLink="/home/people" class="nav-link">People</a>
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="mat-drawer-side" *ngIf="isAdmin">
+        <a routerLink="/home/assignment-manage" class="nav-link">Assignment Management</a>
+        <mat-divider></mat-divider>
+      </div>
+
+      <!--<div class="mat-drawer-side" *ngIf="isAdmin">-->
+      <!--<a  class="make-blue" (click)="onUpload()">Upload File</a>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--</div>-->
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      *ngIf="!drawer.opened"
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <app-header></app-header>
+  </mat-toolbar>
+
+  <div class="main contents">
+    <!--==========================-->
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="boards" >
+
+    <ng-container matColumnDef='tittle'>
+      <th mat-header-cell *matHeaderCellDef >Tittle</th>
+      <td mat-cell *matCellDef="let element"><a  [routerLink]="['/board-detail', element.id]">  {{element.tittle}}   </a></td>
+    </ng-container>
+
+
+    <ng-container matColumnDef='poster'>
+      <th mat-header-cell *matHeaderCellDef >Poster</th>
+      <td mat-cell *matCellDef="let element">{{element.uname}}   </td>
+    </ng-container>
+
+    <ng-container matColumnDef='actions'>
+      <th mat-header-cell *matHeaderCellDef >Actions</th>
+      <td mat-cell *matCellDef="let row" >
+
+        <button mat-icon-button *ngIf="id==row.posterId" (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button *ngIf="id==row.posterId"
+                (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
+
+
+
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <button  mat-icon-button color="warn" class = "btn add_board_button"(click)="onCreate()">
+    <mat-icon [inline]="true">add_circle</mat-icon>
+  </button>
+</div>
+
+    <!--=========================-->
+    <div style="height: 450px">&nbsp;</div>
+  </div>
+
+</mat-drawer-container>

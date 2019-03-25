@@ -1,0 +1,61 @@
+<div fxLayout fxLayoutAlign="center" style="margin: 50px 50px;">
+  <mat-card fxLayout="column" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 auto">
+    <mat-card-title>Register</mat-card-title>
+    <form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()" fxLayout="column" #registerForm="ngForm">
+      <mat-form-field>
+        <mat-placeholder>Username</mat-placeholder>
+        <input type="text" matInput id="username" formControlName="username" required>
+        <mat-error *ngIf="(registerForm.submitted || registerFormGroup.get('username').touched) && registerFormGroup.get('username').invalid">
+          Username can't be empty!
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-placeholder>name</mat-placeholder>
+        <input type="text" matInput id="name" formControlName="name" required>
+        <mat-error *ngIf="(registerForm.submitted || registerFormGroup.get('name').touched) && registerFormGroup.get('name').invalid">
+         name can't be empty!
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-placeholder>email</mat-placeholder>
+        <input type="email" matInput id="email" formControlName="email"  [pattern]="emailPattern" required>
+      <mat-error *ngIf="(registerForm.submitted || registerFormGroup.get('email').touched) && registerFormGroup.get('email').invalid">
+        <!--<mat-error *ngIf="registerForm.hasError('email') && !registerForm.hasError('required')">-->
+          Please enter valid form of Email
+        </mat-error>
+      </mat-form-field>
+
+
+      <div fxLayout="column" formGroupName="passwordGroup">
+        <mat-form-field>
+          <mat-placeholder>Password</mat-placeholder>
+          <input type="password" matInput id="password" formControlName="password" required>
+          <mat-error *ngIf="(registerForm.submitted || registerFormGroup.get('passwordGroup').get('password').touched) && registerFormGroup.get('passwordGroup').get('password').invalid">
+            Password can't be empty!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-placeholder>Confirm Password</mat-placeholder>
+          <input type="password" matInput id="confirm_password" formControlName="confirm_password" required>
+          <mat-error *ngIf="(registerForm.submitted || registerFormGroup.get('passwordGroup').get('confirm_password').touched) && registerFormGroup.get('passwordGroup').get('confirm_password').invalid">
+            Confirm Password can't be empty!
+          </mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="(registerForm.submitted || (registerFormGroup.get('passwordGroup').get('password').touched && registerFormGroup.get('passwordGroup').get('confirm_password').touched))
+          && registerFormGroup.get('passwordGroup').invalid">
+          <!--{{registerFormGroup.get('passwordGroup').errors.passwordGroup}}-->
+        </mat-error>
+      </div>
+      <mat-error *ngIf="registerForm.submitted && err">
+        Username already token, please try another one
+      </mat-error>
+      <p>
+        <button type="submit" mat-raised-button color="primary">Register</button>
+      </p>
+    </form>
+  </mat-card>
+</div>
